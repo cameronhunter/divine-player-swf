@@ -1,7 +1,6 @@
 package {
 
   import flash.display.DisplayObject;
-  import flash.display.DisplayObjectContainer;
   import flash.display.Sprite;
 
   public class Layout {
@@ -30,8 +29,7 @@ package {
     }
 
     public static function centerHorizontally(object: Sprite): Sprite {
-      center(HORIZONTAL, object);
-      return object;
+      return center(HORIZONTAL, object);
     }
 
     public static function absolute(x: uint, y: uint, object: Sprite): Sprite {
@@ -40,7 +38,7 @@ package {
       return object;
     }
 
-    private static function center(direction: uint, object: DisplayObjectContainer): void {
+    private static function center(direction: uint, object: Sprite): Sprite {
       var dimension: String = direction == HORIZONTAL ? WIDTH : HEIGHT;
       var property: String = direction == HORIZONTAL ? X : Y;
 
@@ -57,6 +55,8 @@ package {
         child = object.getChildAt(i);
         child[property] += (largest - child[dimension]) / 2;
       }
+
+      return object;
     }
 
     private static function fit(size: uint, direction: uint, objects: Array): Sprite {
