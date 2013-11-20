@@ -10,6 +10,10 @@ package {
     public function Image(url: String, width: uint, height: uint) {
       if (!url) return;
 
+      graphics.beginFill(0x000000, 0);
+      graphics.drawRect(0, 0, width, height);
+      graphics.endFill();
+
       var loader: Loader = new Loader();
 
       loader.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e: Event): void {

@@ -5,6 +5,7 @@ package {
   import flash.display.StageScaleMode;
   import flash.external.ExternalInterface;
   import flash.system.Security;
+  import flash.events.*;
 
   public class Player extends Sprite {
 
@@ -30,31 +31,26 @@ package {
         loaderInfo.parameters.muted == "true"
       );
 
-      addChildAt(poster, 0);
-      addChildAt(video, 1);
+      var share: Share = new Share(
+        loaderInfo.parameters.url || "http://cameronhunter.co.uk",
+        stage.stageWidth,
+        stage.stageHeight
+      );
 
-      registerJavaScriptAPI(video);
+      share.visible = false;
 
-      onReady();
+      addEventListener(MouseEvent.ROLL_OVER, show(share, true));
+      addEventListener(MouseEvent.ROLL_OUT, show(share, false));
+
+      addChild(poster);
+      addChild(video);
+      addChild(share);
     }
 
-    private function onReady(): void {
-      if (isSafe(ExternalInterface.objectID)) {
-        ExternalInterface.call(["divinePlayer", ExternalInterface.objectID, "onReady"].join("_"));
-      }
-    }
-
-    private function registerJavaScriptAPI(video: Video): void {
-      ExternalInterface.addCallback("divinePlay", video.play);
-      ExternalInterface.addCallback("divinePause", video.pause);
-      ExternalInterface.addCallback("divinePaused", video.isPaused);
-      ExternalInterface.addCallback("divineMute", video.mute);
-      ExternalInterface.addCallback("divineUnmute", video.unmute);
-      ExternalInterface.addCallback("divineMuted", video.isMuted);
-    }
-
-    private function isSafe(value: String): Boolean {
-      return /^[0-9A-Z]+$/i.test(value);
+    private static function show(view: Sprite, value: Boolean): Function {
+      return function(e: Event): void {
+        view.visible = value;
+      };
     }
   }
 }

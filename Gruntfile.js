@@ -51,7 +51,8 @@ module.exports = function(grunt) {
           '<%= source %>/Player.as',
           '-output <%= temp %>/divine-player.swf',
           '-source-path+=<%= source %>',
-          '-load-config=flex-config.xml'
+          '-static-link-runtime-shared-libraries=true'
+          // '-load-config=flex-config.xml'
         ].join(' ')
       },
 
@@ -62,7 +63,8 @@ module.exports = function(grunt) {
           '-output <%= temp %>/divine-player-tests.swf',
           '-source-path+=<%= source %>',
           '-source-path+=lib/as3/src',
-          '-load-config=flex-config.xml'
+          '-static-link-runtime-shared-libraries=true'
+          // '-load-config=flex-config.xml'
         ].join(' ')
       }
     },
