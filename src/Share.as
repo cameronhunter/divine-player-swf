@@ -1,14 +1,13 @@
 package {
 
+  import flash.display.Bitmap;
   import flash.display.DisplayObject;
-  import flash.display.DisplayObjectContainer;
   import flash.display.Sprite;
+  import flash.events.*;
+  import flash.net.URLRequest;
+  import flash.net.navigateToURL;
   import flash.text.TextField;
   import flash.text.TextFormat;
-  import flash.display.Bitmap;
-  import flash.events.*;
-  import flash.net.navigateToURL;
-  import flash.net.URLRequest;
 
   public class Share extends Sprite {
 
@@ -19,23 +18,20 @@ package {
     public function Share(url: String, width: uint, height: uint) {
       if (!url) return;
 
-      var background: Sprite = createBackground(width, height, BACKGROUND_OPACITY);
-
       var share: TextField = text("Share", SHARE_TEXT);
-
       var linkText: Sprite = sprite(text(url + " →", SHARE_BUTTON));
 
-      var cta: DisplayObject = Layout.absolute(15, 15, Layout.vertical(0, share, link(linkText, url)));
+      var twitter: Sprite = link(createShareButton("Twitter", new Resource.TwitterIcon()), url);
+      var email: Sprite = link(createShareButton("Email", new Resource.EmailIcon()), url);
+      var embed: Sprite = link(createShareButton("Embed", new Resource.EmbedIcon()), url);
 
-      var twitter: DisplayObject = link(createShareButton("Twitter", new Resource.TwitterIcon()), url);
-      var email: DisplayObject = link(createShareButton("Email", new Resource.EmailIcon()), url);
-      var embed: DisplayObject = link(createShareButton("Embed", new Resource.EmbedIcon()), url);
-
-      var shareButtons: DisplayObject = Layout.fitVertically(height, Layout.fitHorizontally(width, twitter, email, embed));
+      var background: Sprite = createBackground(width, height, BACKGROUND_OPACITY);
+      var shareText: Sprite = Layout.absolute(30, 15, Layout.vertical(0, share, link(linkText, url)));
+      var shareButtons: Sprite = Layout.fitVertically(height, Layout.fitHorizontally(width, twitter, email, embed));
 
       addChild(background);
       addChild(shareButtons);
-      addChild(cta);
+      addChild(shareText);
     }
 
     private static function createBackground(width: uint, height: uint, opacity: Number = 1): Sprite {
@@ -62,33 +58,22 @@ package {
     }
 
     private static function link(object: Sprite, url: String): Sprite {
+      object.useHandCursor = true;
+      object.buttonMode = true;
+      object.mouseChildren = false;
+
       object.addEventListener(MouseEvent.CLICK, function(e: Event): void {
         navigateToURL(new URLRequest(url), "_blank");
       });
 
-      return withHoverUnderline(withPointer(object));
-    }
-
-    private static function sprite(object: DisplayObject): Sprite {
-      var wrapper: Sprite = new Sprite();
-      wrapper.addChild(object);
-      return wrapper;
-    }
-
-    private static function withPointer(object: Sprite): Sprite {
-      object.useHandCursor = true;
-      object.buttonMode = true;
-      object.mouseChildren = false;
-      return object;
-    }
-
-    private static function withHoverUnderline(object: Sprite): Sprite {
       for(var i: uint = 0; i < object.numChildren; i++) {
         if (object.getChildAt(i) is TextField) {
-          object.addEventListener(MouseEvent.ROLL_OVER, setUnderline(object.getChildAt(i) as TextField, true));
-          object.addEventListener(MouseEvent.ROLL_OUT, setUnderline(object.getChildAt(i) as TextField, false));
+          var textField: TextField = object.getChildAt(i) as TextField;
+          object.addEventListener(MouseEvent.ROLL_OVER, setUnderline(textField, true));
+          object.addEventListener(MouseEvent.ROLL_OUT, setUnderline(textField, false));
         }
       }
+
       return object;
     }
 
@@ -98,6 +83,12 @@ package {
         format.underline = value;
         textField.setTextFormat(format);
       };
+    }
+
+    private static function sprite(object: DisplayObject): Sprite {
+      var wrapper: Sprite = new Sprite();
+      wrapper.addChild(object);
+      return wrapper;
     }
 
   }
