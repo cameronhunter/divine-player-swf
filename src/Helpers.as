@@ -1,0 +1,71 @@
+package {
+
+  import flash.display.DisplayObject;
+  import flash.display.Sprite;
+  import flash.events.*;
+  import flash.net.URLRequest;
+  import flash.net.navigateToURL;
+  import flash.text.AntiAliasType;
+  import flash.text.TextField;
+  import flash.text.TextFieldAutoSize;
+  import flash.text.TextFormat;
+
+  public final class Helpers {
+
+    public static function text(text: String, format: TextFormat, embedFonts: Boolean = false): TextField {
+      var field: TextField = new TextField();
+      if (embedFonts) field.embedFonts = true;
+      field.autoSize = TextFieldAutoSize.LEFT;
+      field.antiAliasType = AntiAliasType.ADVANCED;
+      field.defaultTextFormat = format;
+      field.selectable = false;
+      field.text = text;
+      field.width = field.textWidth + 4;
+      field.height = field.textHeight + 4;
+      return field;
+    }
+
+    public static function link(object: Sprite, url: String): Sprite {
+      object.useHandCursor = true;
+      object.buttonMode = true;
+      object.mouseChildren = false;
+
+      object.addEventListener(MouseEvent.CLICK, function(e: Event): void {
+        navigateToURL(new URLRequest(url), "_blank");
+      });
+
+      for(var i: uint = 0; i < object.numChildren; i++) {
+        if (object.getChildAt(i) is TextField) {
+          var textField: TextField = object.getChildAt(i) as TextField;
+          object.addEventListener(MouseEvent.ROLL_OVER, setUnderline(textField, true));
+          object.addEventListener(MouseEvent.ROLL_OUT, setUnderline(textField, false));
+        }
+      }
+
+      return object;
+    }
+
+    public static function sprite(object: DisplayObject): Sprite {
+      var wrapper: Sprite = new Sprite();
+      wrapper.addChild(object);
+      return wrapper;
+    }
+
+    public static function fill(width: uint, height: uint, color: uint = 0x000000, opacity: Number = 1): Sprite {
+      var background: Sprite = new Sprite();
+      background.graphics.beginFill(color, opacity);
+      background.graphics.drawRect(0, 0, width, height);
+      background.graphics.endFill();
+      return background;
+    }
+
+    private static function setUnderline(textField: TextField, value: Boolean): Function {
+      return function(e: Event): void {
+        var format: TextFormat = textField.getTextFormat();
+        format.underline = value;
+        textField.setTextFormat(format);
+      };
+    }
+
+  }
+}
