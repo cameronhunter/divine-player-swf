@@ -6,13 +6,13 @@ package {
 
   public class Details extends Sprite {
 
-    private static const USERNAME_TEXT: TextFormat = new TextFormat("Arial", 40, 0x00BF8F, true);
-    private static const MESSAGE_TEXT: TextFormat = new TextFormat("Arial", 28, 0x434343, false);
-    private static const DETAILS_TEXT: TextFormat = new TextFormat("Arial", 22, 0xACB0B2, false);
+    private static const USERNAME_TEXT: TextFormat = new TextFormat("Helvetica, Arial", 18, 0x00BF8F, true);
+    private static const MESSAGE_TEXT: TextFormat = new TextFormat("Helvetica, Arial", 16, 0x434343, false);
+    private static const DETAILS_TEXT: TextFormat = new TextFormat("Helvetica, Arial", 10, 0xACB0B2, false);
 
     public function Details(name: String, avatarUrl: String, text: String, date: Number, locationName: String, width: uint) {
 
-      var avatar: Sprite = new Avatar(avatarUrl, 125);
+      var avatar: Sprite = new Avatar(avatarUrl, 50);
 
       var username: TextField = Helpers.text(name, USERNAME_TEXT);
       var message: TextField = Helpers.text(text, MESSAGE_TEXT);
