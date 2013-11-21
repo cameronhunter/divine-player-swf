@@ -9,6 +9,15 @@ package {
 
   public class Player extends Sprite {
 
+    [Embed(
+      source = "../res/standalone-player-font.ttf",
+      fontFamily="standalone-player-font",
+      mimeType="application/x-font",
+      advancedAntiAliasing="true",
+      unicodeRange="U+E600-U+E601"
+    )]
+    private static var StandalonePlayerFont: Class;
+
     public function Player() {
       stage.align = StageAlign.TOP_LEFT;
       stage.scaleMode = StageScaleMode.NO_SCALE;

@@ -8,25 +8,28 @@ package {
   import flash.net.navigateToURL;
   import flash.text.TextField;
   import flash.text.TextFormat;
+  import flash.text.Font;
+  import flash.text.TextFieldAutoSize;
+  import flash.text.AntiAliasType;
 
   public class Share extends Sprite {
 
     private static const BACKGROUND_OPACITY: Number = 0.8;
     private static const SHARE_TEXT: TextFormat = new TextFormat("Arial", 96, 0xFFFFFF, true);
-    private static const SHARE_BUTTON: TextFormat = new TextFormat("Arial", 28, 0xFFFFFF, true);
+    private static const SHARE_BUTTON_TEXT: TextFormat = new TextFormat("Arial", 28, 0xFFFFFF, true);
+    private static const SHARE_BUTTON_ICON: TextFormat = new TextFormat("standalone-player-font", 56, 0xFFFFFF);
 
     public function Share(url: String, width: uint, height: uint) {
       if (!url) return;
 
-      var share: TextField = text("Share", SHARE_TEXT);
+      var share: Sprite = sprite(text("Share", SHARE_TEXT));
 
-      var twitter: Sprite = link(createShareButton("Twitter", new Resource.TwitterIcon()), url);
-      var email: Sprite = link(createShareButton("Email", new Resource.EmailIcon()), url);
-      var embed: Sprite = link(createShareButton("Embed", new Resource.EmbedIcon()), url);
+      var twitter: Sprite = link(createShareButton("Twitter", "\ue601"), url);
+      var href: Sprite = link(createShareButton("Link", "\ue600"), url);
 
       var background: Sprite = createBackground(width, height, BACKGROUND_OPACITY);
       var shareText: Sprite = Layout.absolute(30, 15, share);
-      var shareButtons: Sprite = Layout.fitVertically(height, Layout.fitHorizontally(width, twitter, email, embed));
+      var shareButtons: Sprite = Layout.fitVertically(height, Layout.fitHorizontally(width, twitter, href));
 
       addChild(background);
       addChild(shareButtons);
@@ -41,16 +44,20 @@ package {
       return background;
     }
 
-    private static function createShareButton(name: String, icon: Bitmap): Sprite {
-      var textField: TextField = text(name, SHARE_BUTTON);
+    private static function createShareButton(name: String, iconChar: String): Sprite {
+      var textField: TextField = text(name, SHARE_BUTTON_TEXT);
+      var icon: TextField = text(iconChar, SHARE_BUTTON_ICON, true);
       return Layout.centerHorizontally(Layout.vertical(10, icon, textField));
     }
 
-    private static function text(text: String, format: TextFormat = undefined): TextField {
+    private static function text(text: String, format: TextFormat, embedFonts: Boolean = false): TextField {
       var field: TextField = new TextField();
-      field.text = text;
-      if (format) field.setTextFormat(format);
+      if (embedFonts) field.embedFonts = true;
+      field.autoSize = TextFieldAutoSize.LEFT;
+      field.antiAliasType = AntiAliasType.ADVANCED;
+      field.defaultTextFormat = format;
       field.selectable = false;
+      field.text = text;
       field.width = field.textWidth + 4;
       field.height = field.textHeight + 4;
       return field;

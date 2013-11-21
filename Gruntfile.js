@@ -6,6 +6,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     source: 'src',
     release: 'release',
+    resources: 'res',
     test: 'test',
     temp: '.tmp',
 
@@ -49,10 +50,11 @@ module.exports = function(grunt) {
         cmd: [
           'mxmlc',
           '<%= source %>/Player.as',
+          '-benchmark',
           '-output <%= temp %>/divine-player.swf',
           '-source-path+=<%= source %>',
+          '-managers flash.fonts.AFEFontManager',
           '-static-link-runtime-shared-libraries=true'
-          // '-load-config=flex-config.xml'
         ].join(' ')
       },
 
@@ -64,7 +66,6 @@ module.exports = function(grunt) {
           '-source-path+=<%= source %>',
           '-source-path+=lib/as3/src',
           '-static-link-runtime-shared-libraries=true'
-          // '-load-config=flex-config.xml'
         ].join(' ')
       }
     },
@@ -109,4 +110,5 @@ module.exports = function(grunt) {
     'build',
     'connect:tests'
   ]);
+
 };
