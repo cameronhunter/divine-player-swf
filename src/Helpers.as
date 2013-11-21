@@ -12,12 +12,12 @@ package {
 
   public final class Helpers {
 
-    public static function text(text: String, format: TextFormat, embedFonts: Boolean = false): TextField {
+    public static function text(text: String, format: TextFormat = undefined, embedFonts: Boolean = false): TextField {
       var field: TextField = new TextField();
       if (embedFonts) field.embedFonts = true;
       field.autoSize = TextFieldAutoSize.LEFT;
       field.antiAliasType = AntiAliasType.ADVANCED;
-      field.defaultTextFormat = format;
+      if (format) field.defaultTextFormat = format;
       field.selectable = false;
       field.text = text;
       field.width = field.textWidth + 4;
@@ -57,6 +57,15 @@ package {
       background.graphics.drawRect(0, 0, width, height);
       background.graphics.endFill();
       return background;
+    }
+
+    public static function circle(diameter: uint, color: uint = 0x000000): Sprite {
+      var radius: Number = diameter / 2;
+      var object: Sprite = new Sprite();
+      object.graphics.beginFill(color, 1);
+      object.graphics.drawCircle(radius, radius, radius);
+      object.graphics.endFill();
+      return object;
     }
 
     private static function setUnderline(textField: TextField, value: Boolean): Function {

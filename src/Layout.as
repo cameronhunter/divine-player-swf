@@ -38,6 +38,12 @@ package {
       return object;
     }
 
+    public static function scale(object: Sprite, value: Number): Sprite {
+      object.scaleX = value;
+      object.scaleY = value;
+      return object;
+    }
+
     private static function center(direction: uint, object: Sprite): Sprite {
       var dimension: String = direction == HORIZONTAL ? WIDTH : HEIGHT;
       var property: String = direction == HORIZONTAL ? X : Y;
