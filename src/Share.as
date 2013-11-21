@@ -19,14 +19,13 @@ package {
       if (!url) return;
 
       var share: TextField = text("Share", SHARE_TEXT);
-      var linkText: Sprite = sprite(text(url + " →", SHARE_BUTTON));
 
       var twitter: Sprite = link(createShareButton("Twitter", new Resource.TwitterIcon()), url);
       var email: Sprite = link(createShareButton("Email", new Resource.EmailIcon()), url);
       var embed: Sprite = link(createShareButton("Embed", new Resource.EmbedIcon()), url);
 
       var background: Sprite = createBackground(width, height, BACKGROUND_OPACITY);
-      var shareText: Sprite = Layout.absolute(30, 15, Layout.vertical(0, share, link(linkText, url)));
+      var shareText: Sprite = Layout.absolute(30, 15, share);
       var shareButtons: Sprite = Layout.fitVertically(height, Layout.fitHorizontally(width, twitter, email, embed));
 
       addChild(background);
