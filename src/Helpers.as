@@ -59,10 +59,10 @@ package {
       return background;
     }
 
-    public static function circle(diameter: uint, color: uint = 0x000000): Sprite {
+    public static function circle(diameter: uint, color: uint = 0x000000, opacity: Number = 1): Sprite {
       var radius: Number = diameter / 2;
       var object: Sprite = new Sprite();
-      object.graphics.beginFill(color, 1);
+      object.graphics.beginFill(color, opacity);
       object.graphics.drawCircle(radius, radius, radius);
       object.graphics.endFill();
       return object;

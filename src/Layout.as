@@ -44,6 +44,10 @@ package {
       return object;
     }
 
+    public static function middle(width: uint, height: uint, object: Sprite): Sprite {
+      return fitHorizontally(width, fitVertically(height, object));
+    }
+
     private static function center(direction: uint, object: Sprite): Sprite {
       var dimension: String = direction == HORIZONTAL ? WIDTH : HEIGHT;
       var property: String = direction == HORIZONTAL ? X : Y;

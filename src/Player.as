@@ -6,6 +6,7 @@ package {
   import flash.external.ExternalInterface;
   import flash.system.Security;
   import flash.events.*;
+  import flash.text.TextFormat;
 
   [SWF(backgroundColor="0xFFFFFF")]
   public class Player extends Sprite {
@@ -15,9 +16,11 @@ package {
       fontFamily="standalone-player-font",
       mimeType="application/x-font",
       advancedAntiAliasing="true",
-      unicodeRange="U+E600-U+E601"
+      unicodeRange="U+E600-U+E603"
     )]
     private static var StandalonePlayerFont: Class;
+
+    private static const PLAY_BUTTON: TextFormat = new TextFormat("standalone-player-font", 250, 0xFFFFFF);
 
     public function Player() {
       stage.align = StageAlign.TOP_LEFT;
@@ -35,13 +38,31 @@ package {
         playerSize, playerSize
       );
 
+      var playButton: Sprite = Layout.scale(Helpers.sprite(Helpers.text("\ue603", PLAY_BUTTON, true)), 2);
+      var playBackground: Sprite = Layout.scale(Helpers.circle(playButton.width, 0x000000, 0.6), 0.8);
+
+      var curtain: Sprite = new Sprite();
+      curtain.addChild(poster);
+      //curtain.addChild(Layout.middle(playerSize, playerSize, playBackground));
+      //curtain.addChild(Layout.middle(playerSize, playerSize, playButton));
+
       var video: Video = new Video(
         loaderInfo.parameters.video,
         playerSize, playerSize,
-        loaderInfo.parameters.autoplay == "true",
-        loaderInfo.parameters.loop == "true",
-        loaderInfo.parameters.muted == "true"
+        true, // autoplay
+        true, // loop
+        false // muted
       );
+
+      curtain.addEventListener(MouseEvent.CLICK, function(): void {
+        curtain.visible = false;
+        video.play();
+      });
+
+      video.addEventListener(MouseEvent.CLICK, function(): void {
+        video.pause();
+        curtain.visible = true;
+      });
 
       var share: Share = new Share(
         loaderInfo.parameters.url || "http://cameronhunter.co.uk",
@@ -61,7 +82,7 @@ package {
 //      addEventListener(MouseEvent.ROLL_OVER, show(share, true));
 //      addEventListener(MouseEvent.ROLL_OUT, show(share, false));
 
-      playerContainer.addChild(poster);
+      playerContainer.addChild(curtain);
       playerContainer.addChild(video);
       playerContainer.addChild(share);
 
