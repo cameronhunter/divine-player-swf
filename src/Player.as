@@ -81,8 +81,8 @@ package {
       playerContainer.addChild(video);
       playerContainer.addChild(playPause);
       playerContainer.addChild(Layout.absolute(15, 15, audio));
+      playerContainer.addChild(share);
       playerContainer.addChild(curtain);
-      //playerContainer.addChild(share);
 
       addChild(Layout.vertical(0, playerContainer, details));
     }

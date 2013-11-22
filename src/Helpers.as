@@ -77,17 +77,6 @@ package {
       return object;
     }
 
-    public static function ring(diameter: uint, thickness: uint, color: uint = 0x000000, opacity: Number = 1): Sprite {
-      var radius: Number = diameter / 2;
-      var innerRadius: Number = radius - thickness;
-      var object: Sprite = new Sprite();
-      object.graphics.beginFill(color, opacity);
-      object.graphics.drawCircle(radius, radius, radius);
-      object.graphics.drawCircle(radius, radius, innerRadius);
-      object.graphics.endFill();
-      return object;
-    }
-
     private static function setUnderline(textField: TextField, value: Boolean): Function {
       return function(e: Event): void {
         var format: TextFormat = textField.getTextFormat();
