@@ -81,14 +81,15 @@ module.exports = function(grunt) {
         hostname: "*",
         port: 9001,
         keepalive: true,
-        open: "http://localhost:<%= connect.options.port %>"
+        base: [
+          "<%= test %>/integration",
+          "<%= release %>"
+        ]
       },
+      serve: {},
       tests: {
         options: {
-          base: [
-            "<%= test %>/integration",
-            "<%= release %>"
-          ]
+          open: "http://localhost:<%= connect.options.port %>"
         }
       }
     }
@@ -101,13 +102,18 @@ module.exports = function(grunt) {
     'exec:check_for_mxmlc',
     'clean:swf',
     'exec:build_swf',
-    'exec:build_tests',
     'copy:swf',
     'clean:temp'
   ]);
 
+  grunt.registerTask('serve', [
+    'connect:serve'
+  ]);
+
   grunt.registerTask('test', [
-    'build',
+    'exec:build_tests',
+    'copy:swf',
+    'clean:temp',
     'connect:tests'
   ]);
 
