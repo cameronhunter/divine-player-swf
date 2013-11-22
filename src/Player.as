@@ -7,6 +7,7 @@ package {
   import flash.system.Security;
   import flash.events.*;
   import flash.text.TextFormat;
+  import flash.text.TextField;
 
   [SWF(backgroundColor="0xFFFFFF")]
   public class Player extends Sprite {
@@ -30,57 +31,37 @@ package {
       Security.allowInsecureDomain("*");
 
       var playerSize: uint = stage.stageWidth;
-
       var playerContainer: Sprite = new Sprite();
-
-      var poster: Image = new Image(
-        loaderInfo.parameters.poster,
-        playerSize, playerSize
-      );
-
-      var curtain: Sprite = new Sprite();
-      //curtain.addChild(poster);
 
       var video: Video = new Video(
         loaderInfo.parameters.video,
         playerSize, playerSize,
         false, // autoplay
         true, // loop
-        false // muted
+        true // muted
       );
 
-      var playButton: Sprite = Layout.middle(playerSize, playerSize, new PlayerControl(Icon.PLAY));
-      var pauseButton: Sprite = Helpers.withPointer(Helpers.fill(playerSize, playerSize, 0x000000, 0));
-
-      var muteButton: Sprite = Helpers.withPointer(Helpers.withOpacity(0.85, Layout.absolute(15, 15, Helpers.sprite(Helpers.text(Icon.MUTE, AUDIO_FORMAT, true)))));
-      var unmuteButton: Sprite = Helpers.withPointer(Helpers.withOpacity(0.85, Layout.absolute(15, 15, Helpers.sprite(Helpers.text(Icon.UNMUTE, AUDIO_FORMAT, true)))));
-
-      muteButton.addEventListener(MouseEvent.CLICK, function(): void {
-        video.mute();
-        unmuteButton.visible = true;
-        playerContainer.swapChildren(muteButton, unmuteButton);
-      });
-
-      unmuteButton.addEventListener(MouseEvent.CLICK, function(): void {
-        video.unmute();
-        muteButton.visible = true;
-        playerContainer.swapChildren(muteButton, unmuteButton);
-      });
-
-      muteButton.visible = unmuteButton.visible = false;
-
-      playButton.addEventListener(MouseEvent.CLICK, function(): void {
-        playButton.visible = false;
-        muteButton.visible = unmuteButton.visible = true;
+      var curtain: Sprite = new Curtain(loaderInfo.parameters.poster, playerSize, playerSize);
+      curtain.addEventListener(MouseEvent.CLICK, function(): void {
+        curtain.visible = false;
         video.play();
       });
 
-      pauseButton.addEventListener(MouseEvent.CLICK, function(): void {
-        if (video.isPaused()) {
-          video.play();
+      var audio: Sprite = Helpers.withOpacity(0.85, Helpers.sprite(Helpers.text(Icon.MUTE, AUDIO_FORMAT, true, "audio")));
+      Helpers.withPointer(audio).addEventListener(MouseEvent.CLICK, function(e: MouseEvent): void {
+        var textField: TextField = e.currentTarget.getChildByName("audio") as TextField;
+        if (video.isMuted()) {
+          textField.text = Icon.UNMUTE;
+          video.unmute();
         } else {
-          video.pause();
+          textField.text = Icon.MUTE;
+          video.mute();
         }
+      });
+
+      var playPause: Sprite = Helpers.fill(playerSize, playerSize, 0x000000, 0);
+      playPause.addEventListener(MouseEvent.CLICK, function(): void {
+        video.isPaused() ? video.play() : video.pause();
       });
 
       var share: Share = new Share(
@@ -97,11 +78,10 @@ package {
         stage.stageWidth
       );
 
-      playerContainer.addChild(unmuteButton);
       playerContainer.addChild(video);
-      playerContainer.addChild(pauseButton);
-      playerContainer.addChild(muteButton);
-      playerContainer.addChild(playButton);
+      playerContainer.addChild(playPause);
+      playerContainer.addChild(Layout.absolute(15, 15, audio));
+      playerContainer.addChild(curtain);
       //playerContainer.addChild(share);
 
       addChild(Layout.vertical(0, playerContainer, details));

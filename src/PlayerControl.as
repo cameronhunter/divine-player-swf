@@ -7,32 +7,18 @@ package {
 
   public class PlayerControl extends Sprite {
 
-    private static const WHITE: uint = 0xFFFFFF;
-    private static const HOVER_COLOR: uint = 0x00BF8F;
+    private static const FOREGROUND: uint = 0xFFFFFF;
+    private static const BACKGROUND: uint = 0x00BF8F;
 
     public function PlayerControl(icon: String) {
-      var textFormat: TextFormat = new TextFormat("standalone-player-font", 48, WHITE);
-      textFormat.leftMargin = icon == Icon.PLAY ? 8 : 0; // FIXME: Probably shouldn't need to do this
+      var textFormat: TextFormat = new TextFormat("standalone-player-font", 48, FOREGROUND);
+      textFormat.leftMargin = 8; // FIXME: Probably shouldn't need to do this
 
       var button: Sprite = Helpers.sprite(Helpers.text(icon, textFormat, true));
-      var background: Sprite = Helpers.circle(85, HOVER_COLOR, 0.9);
-
-      var onBlur: ColorTransform = background.transform.colorTransform;
-      var onHover: ColorTransform = new ColorTransform();
-      onHover.alphaOffset = 255;
-
-      addEventListener(MouseEvent.ROLL_OVER, function(e: Event): void {
-        background.transform.colorTransform = onHover;
-      });
-
-      addEventListener(MouseEvent.ROLL_OUT, function(e: Event): void {
-        background.transform.colorTransform = onBlur;
-      });
+      var background: Sprite = Helpers.circle(85, BACKGROUND);
 
       addChild(background);
       addChild(Layout.middle(85, 85, button));
-
-      Helpers.withPointer(this);
     }
 
   }

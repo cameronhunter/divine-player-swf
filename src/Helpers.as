@@ -12,9 +12,10 @@ package {
 
   public final class Helpers {
 
-    public static function text(text: String, format: TextFormat = undefined, embedFonts: Boolean = false): TextField {
+    public static function text(text: String, format: TextFormat = undefined, embedFonts: Boolean = false, name: String = undefined): TextField {
       var field: TextField = new TextField();
       if (embedFonts) field.embedFonts = true;
+      if (name) field.name = name;
       field.autoSize = TextFieldAutoSize.LEFT;
       field.antiAliasType = AntiAliasType.ADVANCED;
       if (format) field.defaultTextFormat = format;
