@@ -78,11 +78,16 @@ package {
         stage.stageWidth
       );
 
+      share.visible = false;
+      details.addEventListener(MouseEvent.CLICK, function(): void {
+        share.visible = true;
+      });
+
       playerContainer.addChild(video);
       playerContainer.addChild(playPause);
       playerContainer.addChild(Layout.absolute(15, 15, audio));
-      playerContainer.addChild(share);
       playerContainer.addChild(curtain);
+      playerContainer.addChild(share);
 
       addChild(Layout.vertical(0, playerContainer, details));
     }
