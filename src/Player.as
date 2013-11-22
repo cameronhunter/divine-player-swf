@@ -16,11 +16,11 @@ package {
       fontFamily="standalone-player-font",
       mimeType="application/x-font",
       advancedAntiAliasing="true",
-      unicodeRange="U+E600-U+E603"
+      unicodeRange="U+E600-U+E607"
     )]
     private static var StandalonePlayerFont: Class;
 
-    private static const PLAY_BUTTON: TextFormat = new TextFormat("standalone-player-font", 250, 0xFFFFFF);
+    private static const AUDIO_FORMAT: TextFormat = new TextFormat("standalone-player-font", 28, 0xFFFFFF);
 
     public function Player() {
       stage.align = StageAlign.TOP_LEFT;
@@ -38,30 +38,49 @@ package {
         playerSize, playerSize
       );
 
-      var playButton: Sprite = Layout.scale(Helpers.sprite(Helpers.text("\ue603", PLAY_BUTTON, true)), 2);
-      var playBackground: Sprite = Layout.scale(Helpers.circle(playButton.width, 0x000000, 0.6), 0.8);
-
       var curtain: Sprite = new Sprite();
-      curtain.addChild(poster);
-      //curtain.addChild(Layout.middle(playerSize, playerSize, playBackground));
-      //curtain.addChild(Layout.middle(playerSize, playerSize, playButton));
+      //curtain.addChild(poster);
 
       var video: Video = new Video(
         loaderInfo.parameters.video,
         playerSize, playerSize,
-        true, // autoplay
+        false, // autoplay
         true, // loop
         false // muted
       );
 
-      curtain.addEventListener(MouseEvent.CLICK, function(): void {
-        curtain.visible = false;
+      var playButton: Sprite = Layout.middle(playerSize, playerSize, new PlayerControl(Icon.PLAY));
+      var pauseButton: Sprite = Helpers.withPointer(Helpers.fill(playerSize, playerSize, 0x000000, 0));
+
+      var muteButton: Sprite = Helpers.withPointer(Helpers.withOpacity(0.85, Layout.absolute(15, 15, Helpers.sprite(Helpers.text(Icon.MUTE, AUDIO_FORMAT, true)))));
+      var unmuteButton: Sprite = Helpers.withPointer(Helpers.withOpacity(0.85, Layout.absolute(15, 15, Helpers.sprite(Helpers.text(Icon.UNMUTE, AUDIO_FORMAT, true)))));
+
+      muteButton.addEventListener(MouseEvent.CLICK, function(): void {
+        video.mute();
+        unmuteButton.visible = true;
+        playerContainer.swapChildren(muteButton, unmuteButton);
+      });
+
+      unmuteButton.addEventListener(MouseEvent.CLICK, function(): void {
+        video.unmute();
+        muteButton.visible = true;
+        playerContainer.swapChildren(muteButton, unmuteButton);
+      });
+
+      muteButton.visible = unmuteButton.visible = false;
+
+      playButton.addEventListener(MouseEvent.CLICK, function(): void {
+        playButton.visible = false;
+        muteButton.visible = unmuteButton.visible = true;
         video.play();
       });
 
-      video.addEventListener(MouseEvent.CLICK, function(): void {
-        video.pause();
-        curtain.visible = true;
+      pauseButton.addEventListener(MouseEvent.CLICK, function(): void {
+        if (video.isPaused()) {
+          video.play();
+        } else {
+          video.pause();
+        }
       });
 
       var share: Share = new Share(
@@ -78,21 +97,15 @@ package {
         stage.stageWidth
       );
 
-//      share.visible = false;
-//      addEventListener(MouseEvent.ROLL_OVER, show(share, true));
-//      addEventListener(MouseEvent.ROLL_OUT, show(share, false));
-
-      playerContainer.addChild(curtain);
+      playerContainer.addChild(unmuteButton);
       playerContainer.addChild(video);
-      playerContainer.addChild(share);
+      playerContainer.addChild(pauseButton);
+      playerContainer.addChild(muteButton);
+      playerContainer.addChild(playButton);
+      //playerContainer.addChild(share);
 
       addChild(Layout.vertical(0, playerContainer, details));
     }
 
-    private static function show(view: Sprite, value: Boolean): Function {
-      return function(e: Event): void {
-        view.visible = value;
-      };
-    }
   }
 }

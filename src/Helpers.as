@@ -26,10 +26,6 @@ package {
     }
 
     public static function link(object: Sprite, url: String): Sprite {
-      object.useHandCursor = true;
-      object.buttonMode = true;
-      object.mouseChildren = false;
-
       object.addEventListener(MouseEvent.CLICK, function(e: Event): void {
         navigateToURL(new URLRequest(url), "_blank");
       });
@@ -42,6 +38,18 @@ package {
         }
       }
 
+      return withPointer(object);
+    }
+
+    public static function withOpacity(opacity: Number, object: Sprite): Sprite {
+      object.alpha = opacity;
+      return object;
+    }
+
+    public static function withPointer(object: Sprite): Sprite {
+      object.useHandCursor = true;
+      object.buttonMode = true;
+      object.mouseChildren = false;
       return object;
     }
 
@@ -64,6 +72,17 @@ package {
       var object: Sprite = new Sprite();
       object.graphics.beginFill(color, opacity);
       object.graphics.drawCircle(radius, radius, radius);
+      object.graphics.endFill();
+      return object;
+    }
+
+    public static function ring(diameter: uint, thickness: uint, color: uint = 0x000000, opacity: Number = 1): Sprite {
+      var radius: Number = diameter / 2;
+      var innerRadius: Number = radius - thickness;
+      var object: Sprite = new Sprite();
+      object.graphics.beginFill(color, opacity);
+      object.graphics.drawCircle(radius, radius, radius);
+      object.graphics.drawCircle(radius, radius, innerRadius);
       object.graphics.endFill();
       return object;
     }
