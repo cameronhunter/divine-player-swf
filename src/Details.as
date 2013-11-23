@@ -10,7 +10,7 @@ package {
     private static const MESSAGE_TEXT: TextFormat = new TextFormat("Helvetica, Arial", 16, 0x434343, false);
     private static const DETAILS_TEXT: TextFormat = new TextFormat("Helvetica, Arial", 10, 0xACB0B2, false);
 
-    public function Details(name: String, avatarUrl: String, text: String, date: Number, locationName: String, width: uint) {
+    public function Details(name: String, avatarUrl: String, text: String, date: Number, locationName: String, width: uint, height: uint) {
 
       var avatar: Sprite = new Avatar(avatarUrl, 50);
 

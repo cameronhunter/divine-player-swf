@@ -21,6 +21,9 @@ package {
     )]
     private static var StandalonePlayerFont: Class;
 
+    private static const WIDTH: uint = 480;
+    private static const HEIGHT: uint = 640;
+
     private static const AUDIO_FORMAT: TextFormat = new TextFormat("standalone-player-font", 28, 0xFFFFFF);
 
     public function Player() {
@@ -75,7 +78,8 @@ package {
         loaderInfo.parameters.text || "Look at these horses run free. It makes me so very #happy",
         loaderInfo.parameters.date || 1385018455,
         loaderInfo.parameters.location || "Edinburgh",
-        stage.stageWidth
+        stage.stageWidth,
+        160
       );
 
       share.visible = false;
