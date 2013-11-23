@@ -24,7 +24,7 @@ package {
     private static const WIDTH: uint = 480;
     private static const HEIGHT: uint = 640;
 
-    private static const AUDIO_FORMAT: TextFormat = new TextFormat("standalone-player-font", 28, 0xFFFFFF);
+    private static const AUDIO_FORMAT: TextFormat = new TextFormat("standalone-player-font", 32, 0xFFFFFF);
 
     public function Player() {
       stage.align = StageAlign.TOP_LEFT;
@@ -76,7 +76,7 @@ package {
         loaderInfo.parameters.name || "Ian Padgham",
         loaderInfo.parameters.avatar || "https://v.cdn.vine.co/v/avatars/637F68B3-FE31-424F-BC88-E8AA4BF293CE-6199-0000041FF76BBB5A.jpg?versionId=1OKBqNZJwbvX1bxqI3sh22C4gpjsIUX4",
         loaderInfo.parameters.text || "Look at these horses run free. It makes me so very #happy",
-        loaderInfo.parameters.date || 1385018455,
+        loaderInfo.parameters.date || 1385018455000,
         loaderInfo.parameters.location || "Edinburgh",
         stage.stageWidth,
         160

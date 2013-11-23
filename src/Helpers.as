@@ -12,17 +12,42 @@ package {
 
   public final class Helpers {
 
-    public static function text(text: String, format: TextFormat = undefined, embedFonts: Boolean = false, name: String = undefined): TextField {
+    public static function multiline(width: uint, parts: Array): TextField {
+      var field: TextField = new TextField();
+      field.autoSize = TextFieldAutoSize.LEFT;
+      field.antiAliasType = AntiAliasType.ADVANCED;
+
+      var part: Object;
+
+      for each(part in parts) {
+        field.text = field.text ? field.text + " " + part.text : part.text;
+      }
+
+      var start: uint = 0;
+      for each(part in parts) {
+        field.setTextFormat(part.format, start, start + part.text.length + 1);
+        start += part.text.length;
+      }
+
+      field.selectable = false;
+      field.multiline = false;
+      field.wordWrap = true;
+      field.height = field.textHeight;
+      field.width = width;
+      return field;
+    }
+
+    public static function text(text: String, format: TextFormat, embedFonts: Boolean = false, name: String = undefined): TextField {
       var field: TextField = new TextField();
       if (embedFonts) field.embedFonts = true;
       if (name) field.name = name;
       field.autoSize = TextFieldAutoSize.LEFT;
       field.antiAliasType = AntiAliasType.ADVANCED;
-      if (format) field.defaultTextFormat = format;
+      field.defaultTextFormat = format;
       field.selectable = false;
       field.text = text;
-      field.width = field.textWidth + 4;
-      field.height = field.textHeight + 4;
+      field.width = field.textWidth;
+      field.height = field.textHeight;
       return field;
     }
 
