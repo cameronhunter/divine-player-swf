@@ -55,7 +55,10 @@ package {
       object.addEventListener(MouseEvent.CLICK, function(e: Event): void {
         navigateToURL(new URLRequest(url), "_blank");
       });
+      return withPointer(withUnderline(object));
+    }
 
+    public static function withUnderline(object: Sprite): Sprite {
       for(var i: uint = 0; i < object.numChildren; i++) {
         if (object.getChildAt(i) is TextField) {
           var textField: TextField = object.getChildAt(i) as TextField;
@@ -63,8 +66,7 @@ package {
           object.addEventListener(MouseEvent.ROLL_OUT, setUnderline(textField, false));
         }
       }
-
-      return withPointer(object);
+      return object;
     }
 
     public static function withOpacity(opacity: Number, object: Sprite): Sprite {

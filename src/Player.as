@@ -26,6 +26,14 @@ package {
     private static const AUDIO_FORMAT: TextFormat = new TextFormat("standalone-player-font", 32, 0xFFFFFF);
 
     public function Player() {
+      try {
+        init();
+      } catch(e: Error) {
+        Logger.error(e);
+      }
+    }
+
+    private function init(): void {
       stage.align = StageAlign.TOP_LEFT;
       stage.scaleMode = StageScaleMode.NO_SCALE;
 
@@ -78,7 +86,7 @@ package {
       );
 
       share.visible = false;
-      details.addEventListener(MouseEvent.CLICK, function(): void {
+      details.addEventListener(MouseEvent.CLICK, function(e: Event): void {
         share.visible = true;
       });
 

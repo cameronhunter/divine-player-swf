@@ -3,6 +3,7 @@ package {
   import flash.display.Sprite;
   import flash.text.TextField;
   import flash.text.TextFormat;
+  import flash.events.*;
 
   public class Details extends Sprite {
 
@@ -25,6 +26,13 @@ package {
       0xACB0B2  // color
     );
 
+    private static const SHARE_TEXT: TextFormat = new TextFormat(
+      "Helvetica Neue, Arial",
+      13,       // font-size
+      0x00BF8F, // color
+      true      // bold
+    );
+
     public function Details(name: String, avatarUrl: String, text: String, date: Number, locationName: String, width: uint) {
       var avatar: Sprite = new Avatar(avatarUrl, 70);
 
@@ -36,11 +44,11 @@ package {
       var details: TextField = Helpers.text([
         new Date(date).toLocaleDateString(),
         locationName ? "at " + locationName : "",
-        "•",
-        "Share"
+        "•"
       ].join(" "), DETAILS_TEXT);
 
-      var textPart: Sprite = Layout.vertical(5, caption, details);
+      var shareLink: Sprite = Helpers.withPointer(Helpers.withUnderline(Helpers.sprite(Helpers.text("Share", SHARE_TEXT))));
+      var textPart: Sprite = Layout.vertical(5, caption, Layout.horizontal(2, details, shareLink));
       var layout: Sprite = Layout.horizontal(10, avatar, textPart);
 
       layout.x = 10;
