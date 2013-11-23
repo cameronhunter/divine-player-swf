@@ -87,7 +87,9 @@ package {
 
       share.visible = false;
       details.addEventListener(MouseEvent.CLICK, function(e: Event): void {
-        share.visible = true;
+        if (e.target.name == "shareLink") {
+          share.visible = true;
+        }
       });
 
       var player: Sprite = new Sprite();

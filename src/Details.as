@@ -48,6 +48,8 @@ package {
       ].join(" "), DETAILS_TEXT);
 
       var shareLink: Sprite = Helpers.withPointer(Helpers.withUnderline(Helpers.sprite(Helpers.text("Share", SHARE_TEXT))));
+      shareLink.name = "shareLink";
+
       var textPart: Sprite = Layout.vertical(5, caption, Layout.horizontal(2, details, shareLink));
       var layout: Sprite = Layout.horizontal(10, avatar, textPart);
 
