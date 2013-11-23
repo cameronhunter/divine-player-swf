@@ -22,7 +22,6 @@ package {
     private static var StandalonePlayerFont: Class;
 
     private static const PLAYER_SIZE: uint = 480;
-    private static const HEIGHT: uint = 610;
 
     private static const AUDIO_FORMAT: TextFormat = new TextFormat("standalone-player-font", 32, 0xFFFFFF);
 
@@ -32,8 +31,6 @@ package {
 
       Security.allowDomain("*");
       Security.allowInsecureDomain("*");
-
-      var playerContainer: Sprite = new Sprite();
 
       var video: Video = new Video(
         loaderInfo.parameters.video,
@@ -77,8 +74,7 @@ package {
         loaderInfo.parameters.text || "Look at these horses run free. It makes me so very #happy",
         loaderInfo.parameters.date || 1385018455000,
         loaderInfo.parameters.location || "Edinburgh",
-        PLAYER_SIZE,
-        HEIGHT - PLAYER_SIZE
+        PLAYER_SIZE
       );
 
       share.visible = false;
@@ -86,23 +82,24 @@ package {
         share.visible = true;
       });
 
-      playerContainer.addChild(video);
-      playerContainer.addChild(playPause);
-      playerContainer.addChild(Layout.absolute(15, 15, audio));
-      playerContainer.addChild(curtain);
-      playerContainer.addChild(share);
+      var player: Sprite = new Sprite();
+      player.addChild(video);
+      player.addChild(playPause);
+      player.addChild(Layout.absolute(15, 15, audio));
+      player.addChild(curtain);
+      player.addChild(share);
 
-      var scaledContainer: Sprite;
-      var container: Sprite = Layout.vertical(0, playerContainer, details);
+      addChild(scaleForStage(Layout.vertical(0, player, details)));
+    }
+
+    private function scaleForStage(layout: Sprite): Sprite {
       if (stage.stageWidth < stage.stageHeight) {
-        container.scaleX = container.scaleY = stage.stageWidth / container.width;
-        scaledContainer = container;
+        layout.scaleX = layout.scaleY = stage.stageWidth / layout.width;
+        return layout;
       } else {
-        container.scaleX = container.scaleY = stage.stageHeight / container.height;
-        scaledContainer = Layout.fitHorizontally(stage.stageWidth, container);
+        layout.scaleX = layout.scaleY = stage.stageHeight / layout.height;
+        return Layout.fitHorizontally(stage.stageWidth, layout);
       }
-
-      addChild(scaledContainer);
     }
 
   }

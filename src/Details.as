@@ -25,7 +25,7 @@ package {
       0xACB0B2  // color
     );
 
-    public function Details(name: String, avatarUrl: String, text: String, date: Number, locationName: String, width: uint, height: uint) {
+    public function Details(name: String, avatarUrl: String, text: String, date: Number, locationName: String, width: uint) {
       var avatar: Sprite = new Avatar(avatarUrl, 70);
 
       var caption: TextField = Helpers.multiline(370, [
