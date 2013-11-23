@@ -34,7 +34,7 @@ package {
       ]);
 
       var details: TextField = Helpers.text([
-        new Date(date).toString(),
+        new Date(date).toLocaleDateString(),
         locationName ? "at " + locationName : "",
         "•",
         "Share"

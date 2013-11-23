@@ -21,8 +21,8 @@ package {
     )]
     private static var StandalonePlayerFont: Class;
 
-    private static const WIDTH: uint = 480;
-    private static const HEIGHT: uint = 640;
+    private static const PLAYER_SIZE: uint = 480;
+    private static const HEIGHT: uint = 610;
 
     private static const AUDIO_FORMAT: TextFormat = new TextFormat("standalone-player-font", 32, 0xFFFFFF);
 
@@ -33,18 +33,17 @@ package {
       Security.allowDomain("*");
       Security.allowInsecureDomain("*");
 
-      var playerSize: uint = stage.stageWidth;
       var playerContainer: Sprite = new Sprite();
 
       var video: Video = new Video(
         loaderInfo.parameters.video,
-        playerSize, playerSize,
+        PLAYER_SIZE, PLAYER_SIZE,
         false, // autoplay
         true, // loop
         true // muted
       );
 
-      var curtain: Sprite = new Curtain(loaderInfo.parameters.poster, playerSize, playerSize);
+      var curtain: Sprite = new Curtain(loaderInfo.parameters.poster, PLAYER_SIZE, PLAYER_SIZE);
       curtain.addEventListener(MouseEvent.CLICK, function(): void {
         curtain.visible = false;
         video.play();
@@ -62,14 +61,14 @@ package {
         }
       });
 
-      var playPause: Sprite = Helpers.fill(playerSize, playerSize, 0x000000, 0);
+      var playPause: Sprite = Helpers.fill(PLAYER_SIZE, PLAYER_SIZE, 0x000000, 0);
       playPause.addEventListener(MouseEvent.CLICK, function(): void {
         video.isPaused() ? video.play() : video.pause();
       });
 
       var share: Share = new Share(
-        loaderInfo.parameters.url || "http://cameronhunter.co.uk",
-        playerSize, playerSize
+        loaderInfo.parameters.url,
+        PLAYER_SIZE, PLAYER_SIZE
       );
 
       var details: Details = new Details(
@@ -78,8 +77,8 @@ package {
         loaderInfo.parameters.text || "Look at these horses run free. It makes me so very #happy",
         loaderInfo.parameters.date || 1385018455000,
         loaderInfo.parameters.location || "Edinburgh",
-        stage.stageWidth,
-        160
+        PLAYER_SIZE,
+        HEIGHT - PLAYER_SIZE
       );
 
       share.visible = false;
@@ -93,7 +92,17 @@ package {
       playerContainer.addChild(curtain);
       playerContainer.addChild(share);
 
-      addChild(Layout.vertical(0, playerContainer, details));
+      var scaledContainer: Sprite;
+      var container: Sprite = Layout.vertical(0, playerContainer, details);
+      if (stage.stageWidth < stage.stageHeight) {
+        container.scaleX = container.scaleY = stage.stageWidth / container.width;
+        scaledContainer = container;
+      } else {
+        container.scaleX = container.scaleY = stage.stageHeight / container.height;
+        scaledContainer = Layout.fitHorizontally(stage.stageWidth, container);
+      }
+
+      addChild(scaledContainer);
     }
 
   }
