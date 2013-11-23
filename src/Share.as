@@ -20,7 +20,12 @@ package {
       if (!url) return;
 
       var share: Sprite = Helpers.sprite(Helpers.text("Share", SHARE_TEXT));
-      var link: Sprite = Helpers.link(Helpers.sprite(Helpers.text(url + " →", LINK_TEXT)), url);
+
+      var linkText: Sprite = Helpers.link(Helpers.sprite(Helpers.text(url, LINK_TEXT)), url, true);
+      var arrow: Sprite = Helpers.sprite(Helpers.text("→", LINK_TEXT));
+
+      var link: Sprite = Layout.horizontal(0, linkText, arrow);
+
       var twitter: Sprite = new ShareButton("Twitter", Icon.TWITTER, url, TWITTER_COLOR);
       var embed: Sprite = new ShareButton("Embed", Icon.EMBED, url, EMBED_COLOR);
 

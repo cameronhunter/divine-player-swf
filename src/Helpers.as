@@ -51,19 +51,23 @@ package {
       return field;
     }
 
-    public static function link(object: Sprite, url: String): Sprite {
+    public static function link(object: Sprite, url: String, alwaysUnderline: Boolean = false): Sprite {
       object.addEventListener(MouseEvent.CLICK, function(e: Event): void {
         navigateToURL(new URLRequest(url), "_blank");
       });
-      return withPointer(withUnderline(object));
+      return withPointer(withUnderline(object, alwaysUnderline));
     }
 
-    public static function withUnderline(object: Sprite): Sprite {
+    public static function withUnderline(object: Sprite, alwaysUnderline: Boolean = false): Sprite {
       for(var i: uint = 0; i < object.numChildren; i++) {
         if (object.getChildAt(i) is TextField) {
           var textField: TextField = object.getChildAt(i) as TextField;
-          object.addEventListener(MouseEvent.ROLL_OVER, setUnderline(textField, true));
-          object.addEventListener(MouseEvent.ROLL_OUT, setUnderline(textField, false));
+          if (alwaysUnderline) {
+            setUnderline(textField, true)();
+          } else {
+            object.addEventListener(MouseEvent.ROLL_OVER, setUnderline(textField, true));
+            object.addEventListener(MouseEvent.ROLL_OUT, setUnderline(textField, false));
+          }
         }
       }
       return object;
@@ -105,7 +109,7 @@ package {
     }
 
     private static function setUnderline(textField: TextField, value: Boolean): Function {
-      return function(e: Event): void {
+      return function(): void {
         var format: TextFormat = textField.getTextFormat();
         format.underline = value;
         textField.setTextFormat(format);
