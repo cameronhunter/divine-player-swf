@@ -33,7 +33,8 @@ package {
       true      // bold
     );
 
-    private static const MINUTE: uint = 1000 * 60;
+    private static const SECOND: uint = 1000;
+    private static const MINUTE: uint = SECOND * 60;
     private static const HOUR: uint = MINUTE * 60;
     private static const DAY: uint = HOUR * 24;
 
@@ -46,7 +47,7 @@ package {
       ]);
 
       var details: TextField = Helpers.text([
-        relativeTimestamp(date),
+        relativeTimestamp(date) + " ago",
         locationName ? "at " + locationName : "",
         "•"
       ].join(" "), DETAILS_TEXT);
@@ -65,10 +66,10 @@ package {
 
     private static function relativeTimestamp(date: Number): String {
       var delta: Number = ((new Date().time) - (new Date(date).time));
-      if (delta < MINUTE) return "Less than a minute ago";
-      if (delta < HOUR) return int(delta / MINUTE) + " minutes ago";
-      if (delta < DAY) return int(delta / HOUR) + " hours ago";
-      return int(delta / DAY) + " days ago";
+      if (delta < MINUTE) return int(delta / SECOND) + "s";
+      if (delta < HOUR) return int(delta / MINUTE) + "m";
+      if (delta < DAY) return int(delta / HOUR) + "h";
+      return int(delta / DAY) + "d";
     }
 
   }
