@@ -11,7 +11,7 @@ package {
     private static const BACKGROUND_COLOR: uint = 0x000000;
     private static const SHARE_TEXT: TextFormat = new TextFormat("Helvetica, Arial", 56, 0xFFFFFF, true);
     private static const LINK_TEXT: TextFormat = new TextFormat("Helvetica, Arial", 16, 0xFFFFFF, true);
-    private static const CLOSE_FORMAT: TextFormat = new TextFormat("standalone-player-font", 18, 0xFFFFFF);
+    private static const CLOSE_FORMAT: TextFormat = new TextFormat("standalone-player-font", 24, 0xFFFFFF);
 
     private static const TWITTER_COLOR: uint = 0x01ACED;
     private static const EMBED_COLOR: uint = 0x00BF8F;
