@@ -33,6 +33,10 @@ package {
       true      // bold
     );
 
+    private static const MINUTE: uint = 1000 * 60;
+    private static const HOUR: uint = MINUTE * 60;
+    private static const DAY: uint = HOUR * 24;
+
     public function Details(name: String, avatarUrl: String, text: String, date: Number, locationName: String, width: uint) {
       var avatar: Sprite = new Avatar(avatarUrl, 70);
 
@@ -42,7 +46,7 @@ package {
       ]);
 
       var details: TextField = Helpers.text([
-        new Date(date).toLocaleDateString(),
+        relativeTimestamp(date),
         locationName ? "at " + locationName : "",
         "•"
       ].join(" "), DETAILS_TEXT);
@@ -57,6 +61,14 @@ package {
       layout.y = 10;
 
       addChild(layout);
+    }
+
+    private static function relativeTimestamp(date: Number): String {
+      var delta: Number = ((new Date().time) - (new Date(date).time));
+      if (delta < MINUTE) return "Less than a minute ago";
+      if (delta < HOUR) return int(delta / MINUTE) + " minutes ago";
+      if (delta < DAY) return int(delta / HOUR) + " hours ago";
+      return int(delta / DAY) + " days ago";
     }
 
   }
