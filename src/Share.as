@@ -37,6 +37,9 @@ package {
         visible = false;
       });
 
+      closeButton.addEventListener(MouseEvent.ROLL_OVER, Helpers.transformOpacity(closeButton, 1));
+      closeButton.addEventListener(MouseEvent.ROLL_OUT, Helpers.transformOpacity(closeButton, closeButton.alpha));
+
       addChild(background);
       addChild(shareButtons);
       addChild(Layout.absolute(15, 15, Layout.vertical(0, share, link)));

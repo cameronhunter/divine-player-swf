@@ -9,6 +9,7 @@ package {
   import flash.text.TextField;
   import flash.text.TextFieldAutoSize;
   import flash.text.TextFormat;
+  import flash.geom.ColorTransform;
 
   public final class Helpers {
 
@@ -71,6 +72,26 @@ package {
         }
       }
       return object;
+    }
+
+    public static function brightnessTransform(brightness: Number): ColorTransform {
+      var offset: Number = brightness > 0 ? 256 * (brightness / 100) : 0;
+      var transform: ColorTransform = new ColorTransform();
+      transform.redMultiplier = transform.greenMultiplier = transform.blueMultiplier = 1 - (Math.abs(brightness)/100);
+      transform.redOffset= transform.greenOffset = transform.blueOffset = offset;
+      return transform;
+    }
+
+    public static function transformColor(object: Sprite, transform: ColorTransform): Function {
+      return function(): void {
+        object.transform.colorTransform = transform;
+      };
+    }
+
+    public static function transformOpacity(object: Sprite, opacity: Number): Function {
+      return function(): void {
+        withOpacity(opacity, object);
+      };
     }
 
     public static function withOpacity(opacity: Number, object: Sprite): Sprite {
