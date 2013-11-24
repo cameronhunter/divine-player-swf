@@ -88,7 +88,7 @@ package {
       share.visible = false;
       details.addEventListener(MouseEvent.CLICK, function(e: Event): void {
         if (e.target.name == "shareLink") {
-          share.visible = true;
+          share.visible = !share.visible;
         }
       });
 
