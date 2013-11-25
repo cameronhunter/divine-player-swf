@@ -21,8 +21,11 @@ package activity {
       addEventListener(MouseEvent.ROLL_OVER, opacity(playButton, 1));
       addEventListener(MouseEvent.ROLL_OUT, opacity(playButton, playButton.alpha));
 
+      var playButtonContainer: Sprite = Layout.middle(width, height, playButton);
+      playButtonContainer.name = "playButton";
+
       addChild(poster);
-      addChild(Layout.middle(width, height, playButton));
+      addChild(playButtonContainer);
 
       Helpers.withPointer(this);
     }

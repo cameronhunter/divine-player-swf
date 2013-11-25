@@ -20,7 +20,7 @@ package {
       fontFamily = "vine-icons",
       mimeType = "application/x-font",
       advancedAntiAliasing = "true",
-      unicodeRange = "U+E600-U+E607"
+      unicodeRange = "U+E600-U+E605"
     )]
     private static var VineIconFont: Class;
 
@@ -92,7 +92,10 @@ package {
 
       share.visible = false;
       details.addEventListener(MouseEvent.CLICK, function(e: Event): void {
-        if (e.target.name == "shareLink") share.visible = !share.visible;
+        if (e.target.name == "shareLink") {
+          share.visible = !share.visible;
+          curtain.getChildByName("playButton").visible = !share.visible;
+        }
       });
 
       var player: Sprite = new Sprite();
