@@ -17,7 +17,7 @@ package {
 
     private static const FONT_NAME: String = "vine-icons";
 
-    public function Icon(icon: String, size: uint, color: uint) {
+    public function Icon(icon: String, size: uint, color: uint = 0xFFFFFF, opacity: Number = 1) {
       var field: TextField = new TextField();
       field.embedFonts = true;
       field.name = icon;
@@ -28,6 +28,8 @@ package {
       field.text = icon;
       field.width = field.textWidth;
       field.height = field.textHeight;
+
+      this.alpha = opacity;
 
       addChild(field);
     }

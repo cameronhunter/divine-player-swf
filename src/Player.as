@@ -52,7 +52,7 @@ package {
         video.play();
       });
 
-      var audio: Sprite = Helpers.withOpacity(0.85, new Icon(Icon.MUTE, 32, 0xFFFFFF));
+      var audio: Sprite = new Icon(Icon.MUTE, 32, 0xFFFFFF, 0.85);
       Helpers.withPointer(audio).addEventListener(MouseEvent.CLICK, function(e: MouseEvent): void {
         var textField: TextField = e.currentTarget.getChildByName(Icon.MUTE) as TextField;
         if (video.isMuted()) {

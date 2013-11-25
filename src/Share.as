@@ -31,7 +31,7 @@ package {
       var background: Sprite = Helpers.fill(width, height, BACKGROUND_COLOR, BACKGROUND_OPACITY);
       var shareButtons: Sprite = Layout.fitVertically(height, Layout.fitHorizontally(width, twitter, embed));
 
-      var closeButton: Sprite = Helpers.withOpacity(0.85, Helpers.withPointer(new Icon(Icon.CLOSE, 24, 0xFFFFFF)));
+      var closeButton: Sprite = Helpers.withPointer(new Icon(Icon.CLOSE, 24, 0xFFFFFF, 0.85));
       closeButton.addEventListener(MouseEvent.CLICK, function(): void {
         visible = false;
       });
