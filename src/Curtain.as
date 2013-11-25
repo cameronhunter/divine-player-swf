@@ -5,14 +5,17 @@ package {
 
   public class Curtain extends Sprite {
 
-    private static const PLAY_BUTTON_OPACITY: Number = 0.85;
+    private static const PLAY_BUTTON_COLOR: uint = 0x00BF8F;
+    private static const PLAY_BUTTON_DIAMETER: uint = 100;
 
     public function Curtain(image: String, width: uint, height: uint) {
       var poster: Image = new Image(image, width, height);
-      var playButton: Sprite = Helpers.withOpacity(PLAY_BUTTON_OPACITY, new PlayerControl(Icon.PLAY));
+      var background: Sprite = Helpers.circle(PLAY_BUTTON_DIAMETER, PLAY_BUTTON_COLOR);
+
+      var playButton: Sprite = Helpers.withOpacity(0.85, Layout.middle(PLAY_BUTTON_DIAMETER, PLAY_BUTTON_DIAMETER, new Icon(Icon.PLAY, 56)));
 
       addEventListener(MouseEvent.ROLL_OVER, opacity(playButton, 1));
-      addEventListener(MouseEvent.ROLL_OUT, opacity(playButton, PLAY_BUTTON_OPACITY));
+      addEventListener(MouseEvent.ROLL_OUT, opacity(playButton, playButton.alpha));
 
       addChild(poster);
       addChild(Layout.middle(width, height, playButton));

@@ -24,14 +24,6 @@ package {
     private static const PLAYER_SIZE: uint = 480;
 
     public function Player() {
-      try {
-        init();
-      } catch(e: Error) {
-        Logger.error(e);
-      }
-    }
-
-    private function init(): void {
       stage.align = StageAlign.TOP_LEFT;
       stage.scaleMode = StageScaleMode.NO_SCALE;
 
