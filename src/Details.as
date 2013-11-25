@@ -4,6 +4,7 @@ package {
   import flash.text.TextField;
   import flash.text.TextFormat;
   import flash.events.*;
+  import components.*;
 
   public class Details extends Sprite {
 
