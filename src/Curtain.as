@@ -2,7 +2,7 @@ package {
 
   import flash.display.Sprite;
   import flash.events.*;
-  import components.*;
+  import component.*;
 
   public class Curtain extends Sprite {
 

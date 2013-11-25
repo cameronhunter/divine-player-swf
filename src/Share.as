@@ -4,7 +4,7 @@ package {
   import flash.text.TextField;
   import flash.text.TextFormat;
   import flash.events.*;
-  import components.*;
+  import component.*;
 
   public class Share extends Sprite {
 

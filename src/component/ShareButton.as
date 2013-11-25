@@ -1,4 +1,4 @@
-package components {
+package component {
 
   import flash.display.Sprite;
   import flash.text.TextField;
