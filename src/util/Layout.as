@@ -1,4 +1,4 @@
-package {
+package util {
 
   import flash.display.DisplayObject;
   import flash.display.Sprite;

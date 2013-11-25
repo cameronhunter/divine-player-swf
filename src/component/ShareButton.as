@@ -5,6 +5,7 @@ package component {
   import flash.text.TextFormat;
   import flash.geom.ColorTransform;
   import flash.events.*;
+  import util.*;
 
   public class ShareButton extends Sprite {
 

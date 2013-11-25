@@ -10,6 +10,7 @@ package {
   import flash.text.TextField;
   import component.*;
   import activity.*;
+  import util.*;
 
   [SWF(backgroundColor="0xFFFFFF")]
   public class Player extends Sprite {

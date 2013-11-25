@@ -5,6 +5,7 @@ package activity {
   import flash.text.TextFormat;
   import flash.events.*;
   import component.*;
+  import util.*;
 
   public class Share extends Sprite {
 

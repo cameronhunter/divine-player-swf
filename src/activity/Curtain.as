@@ -3,6 +3,7 @@ package activity {
   import flash.display.Sprite;
   import flash.events.*;
   import component.*;
+  import util.*;
 
   public class Curtain extends Sprite {
 

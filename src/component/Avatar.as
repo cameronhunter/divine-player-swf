@@ -1,6 +1,7 @@
 package component {
 
   import flash.display.Sprite;
+  import util.*;
 
   public class Avatar extends Sprite {
 
