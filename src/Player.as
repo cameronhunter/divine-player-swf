@@ -98,6 +98,13 @@ package {
         }
       });
 
+      share.addEventListener(MouseEvent.CLICK, function(e: Event): void {
+        if (e.target.name == "closeButton") {
+          share.visible = false;
+          curtain.getChildByName("playButton").visible = true;
+        }
+      });
+
       var player: Sprite = new Sprite();
       player.addChild(Helpers.fill(PLAYER_SIZE, PLAYER_SIZE, 0x000000, 1));
       player.addChild(video);

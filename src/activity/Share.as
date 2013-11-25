@@ -34,9 +34,8 @@ package activity {
       var shareButtons: Sprite = Layout.fitVertically(height, Layout.fitHorizontally(width, twitter, embed));
 
       var closeButton: Sprite = Helpers.withPointer(new Icon(Icon.CLOSE, 24, 0xFFFFFF, 0.85));
-      closeButton.addEventListener(MouseEvent.CLICK, function(): void {
-        visible = false;
-      });
+      var closeButtonContainer: Sprite = Layout.absolute(width - (5 + closeButton.width), 5, closeButton);
+      closeButtonContainer.name = "closeButton";
 
       closeButton.addEventListener(MouseEvent.ROLL_OVER, Helpers.transformOpacity(closeButton, 1));
       closeButton.addEventListener(MouseEvent.ROLL_OUT, Helpers.transformOpacity(closeButton, closeButton.alpha));
@@ -44,7 +43,7 @@ package activity {
       addChild(background);
       addChild(shareButtons);
       addChild(Layout.absolute(15, 15, Layout.vertical(0, share, link)));
-      addChild(Layout.absolute(width - (5 + closeButton.width), 5, closeButton));
+      addChild(closeButtonContainer);
     }
 
   }
