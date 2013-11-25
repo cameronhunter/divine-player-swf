@@ -1,4 +1,4 @@
-package {
+package component {
 
   import flash.display.Loader;
   import flash.display.Sprite;

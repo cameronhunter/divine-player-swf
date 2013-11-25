@@ -1,4 +1,4 @@
-package {
+package activity {
 
   import flash.display.Sprite;
   import flash.text.TextField;

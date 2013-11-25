@@ -1,4 +1,4 @@
-package {
+package component {
 
   import flash.events.NetStatusEvent;
   import flash.media.SoundTransform;
