@@ -14,7 +14,9 @@ package activity {
       var poster: Image = new Image(image, width, height);
       var background: Sprite = Helpers.circle(PLAY_BUTTON_DIAMETER, PLAY_BUTTON_COLOR);
 
-      var playButton: Sprite = Helpers.withOpacity(0.85, Layout.middle(PLAY_BUTTON_DIAMETER, PLAY_BUTTON_DIAMETER, new Icon(Icon.PLAY, 56)));
+      var playButton: Sprite = Helpers.withOpacity(0.85, new Sprite());
+      playButton.addChild(background);
+      playButton.addChild(Layout.middle(PLAY_BUTTON_DIAMETER, PLAY_BUTTON_DIAMETER, new Icon(Icon.PLAY, 56)));
 
       addEventListener(MouseEvent.ROLL_OVER, opacity(playButton, 1));
       addEventListener(MouseEvent.ROLL_OUT, opacity(playButton, playButton.alpha));
