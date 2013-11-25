@@ -89,6 +89,7 @@ package {
       });
 
       var player: Sprite = new Sprite();
+      player.addChild(Helpers.fill(PLAYER_SIZE, PLAYER_SIZE, 0x000000, 1));
       player.addChild(video);
       player.addChild(playPause);
       player.addChild(Layout.absolute(15, 15, audio));
