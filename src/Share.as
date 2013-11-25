@@ -11,7 +11,6 @@ package {
     private static const BACKGROUND_COLOR: uint = 0x000000;
     private static const SHARE_TEXT: TextFormat = new TextFormat("Helvetica, Arial", 56, 0xFFFFFF, true);
     private static const LINK_TEXT: TextFormat = new TextFormat("Helvetica, Arial", 16, 0xFFFFFF, true);
-    private static const CLOSE_FORMAT: TextFormat = new TextFormat("standalone-player-font", 24, 0xFFFFFF);
 
     private static const TWITTER_COLOR: uint = 0x01ACED;
     private static const EMBED_COLOR: uint = 0x00BF8F;
@@ -32,7 +31,7 @@ package {
       var background: Sprite = Helpers.fill(width, height, BACKGROUND_COLOR, BACKGROUND_OPACITY);
       var shareButtons: Sprite = Layout.fitVertically(height, Layout.fitHorizontally(width, twitter, embed));
 
-      var closeButton: Sprite = Helpers.withOpacity(0.85, Helpers.withPointer(Helpers.sprite(Helpers.text(Icon.CLOSE, CLOSE_FORMAT, true))));
+      var closeButton: Sprite = Helpers.withOpacity(0.85, Helpers.withPointer(new Icon(Icon.CLOSE, 24, 0xFFFFFF)));
       closeButton.addEventListener(MouseEvent.CLICK, function(): void {
         visible = false;
       });

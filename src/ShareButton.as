@@ -10,11 +10,10 @@ package {
 
     private static const DIAMETER: uint = 100;
     private static const SHARE_BUTTON_TEXT: TextFormat = new TextFormat("Helvetica, Arial", 24, 0xFFFFFF);
-    private static const SHARE_BUTTON_ICON: TextFormat = new TextFormat("standalone-player-font", 56, 0xFFFFFF);
 
     public function ShareButton(name: String, char: String, url: String, bgColor: uint = 0x000000) {
       var textField: Sprite = Helpers.sprite(Helpers.text(name, SHARE_BUTTON_TEXT));
-      var icon: TextField = Helpers.text(char, SHARE_BUTTON_ICON, true);
+      var icon: Sprite = new Icon(char, 56, 0xFFFFFF);
       var background: Sprite = Helpers.circle(DIAMETER, bgColor);
 
       var normal: ColorTransform = background.transform.colorTransform;

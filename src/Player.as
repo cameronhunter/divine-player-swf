@@ -13,17 +13,15 @@ package {
   public class Player extends Sprite {
 
     [Embed(
-      source = "../res/standalone-player-font.ttf",
-      fontFamily="standalone-player-font",
-      mimeType="application/x-font",
-      advancedAntiAliasing="true",
-      unicodeRange="U+E600-U+E607"
+      source = "../res/vine-icons.ttf",
+      fontFamily = "vine-icons",
+      mimeType = "application/x-font",
+      advancedAntiAliasing = "true",
+      unicodeRange = "U+E600-U+E607"
     )]
-    private static var StandalonePlayerFont: Class;
+    private static var VineIconFont: Class;
 
     private static const PLAYER_SIZE: uint = 480;
-
-    private static const AUDIO_FORMAT: TextFormat = new TextFormat("standalone-player-font", 32, 0xFFFFFF);
 
     public function Player() {
       try {
@@ -54,9 +52,9 @@ package {
         video.play();
       });
 
-      var audio: Sprite = Helpers.withOpacity(0.85, Helpers.sprite(Helpers.text(Icon.MUTE, AUDIO_FORMAT, true, "audio")));
+      var audio: Sprite = Helpers.withOpacity(0.85, new Icon(Icon.MUTE, 32, 0xFFFFFF));
       Helpers.withPointer(audio).addEventListener(MouseEvent.CLICK, function(e: MouseEvent): void {
-        var textField: TextField = e.currentTarget.getChildByName("audio") as TextField;
+        var textField: TextField = e.currentTarget.getChildByName(Icon.MUTE) as TextField;
         if (video.isMuted()) {
           textField.text = Icon.UNMUTE;
           video.unmute();
@@ -87,9 +85,7 @@ package {
 
       share.visible = false;
       details.addEventListener(MouseEvent.CLICK, function(e: Event): void {
-        if (e.target.name == "shareLink") {
-          share.visible = !share.visible;
-        }
+        if (e.target.name == "shareLink") share.visible = !share.visible;
       });
 
       var player: Sprite = new Sprite();

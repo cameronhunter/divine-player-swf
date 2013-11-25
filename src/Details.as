@@ -46,11 +46,7 @@ package {
         {text: text, format: MESSAGE_TEXT}
       ]);
 
-      var details: TextField = Helpers.text([
-        relativeTimestamp(date) + " ago",
-        locationName ? "at " + locationName : "",
-        "•"
-      ].join(" "), DETAILS_TEXT);
+      var details: TextField = Helpers.text([relativeTimestamp(date) + " ago", locationName ? "at " + locationName : "", "•"].join(" "), DETAILS_TEXT);
 
       var shareLink: Sprite = Helpers.withPointer(Helpers.withUnderline(Helpers.sprite(Helpers.text("Share", SHARE_TEXT))));
       shareLink.name = "shareLink";
