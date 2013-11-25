@@ -25,8 +25,8 @@ package {
 
       var link: Sprite = Layout.horizontal(0, linkText, arrow);
 
-      var twitter: Sprite = new ShareButton("Twitter", Icon.TWITTER, url, TWITTER_COLOR);
-      var embed: Sprite = new ShareButton("Embed", Icon.EMBED, url, EMBED_COLOR);
+      var twitter: Sprite = new ShareButton("Twitter", Icon.TWITTER, TWITTER_COLOR);
+      var embed: Sprite = new ShareButton("Embed", Icon.EMBED, EMBED_COLOR);
 
       var background: Sprite = Helpers.fill(width, height, BACKGROUND_COLOR, BACKGROUND_OPACITY);
       var shareButtons: Sprite = Layout.fitVertically(height, Layout.fitHorizontally(width, twitter, embed));

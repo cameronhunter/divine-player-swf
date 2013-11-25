@@ -11,7 +11,7 @@ package {
     private static const DIAMETER: uint = 100;
     private static const SHARE_BUTTON_TEXT: TextFormat = new TextFormat("Helvetica, Arial", 24, 0xFFFFFF);
 
-    public function ShareButton(name: String, char: String, url: String, bgColor: uint = 0x000000) {
+    public function ShareButton(name: String, char: String, bgColor: uint) {
       var textField: Sprite = Helpers.sprite(Helpers.text(name, SHARE_BUTTON_TEXT));
       var icon: Sprite = new Icon(char, 56, 0xFFFFFF);
       var background: Sprite = Helpers.circle(DIAMETER, bgColor);
@@ -24,7 +24,10 @@ package {
 
       background.addChild(Layout.fitHorizontally(DIAMETER, Layout.fitVertically(DIAMETER, icon)));
 
-      addChild(Helpers.link(Layout.centerHorizontally(Layout.vertical((textField.height / 2), background, textField)), url));
+      var button: Sprite = Helpers.withPointer(Layout.centerHorizontally(Layout.vertical((textField.height / 2), background, textField)))
+      button.name = char;
+
+      addChild(button);
     }
 
   }

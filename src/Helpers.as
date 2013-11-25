@@ -38,10 +38,8 @@ package {
       return field;
     }
 
-    public static function text(text: String, format: TextFormat, embedFonts: Boolean = false, name: String = undefined): TextField {
+    public static function text(text: String, format: TextFormat): TextField {
       var field: TextField = new TextField();
-      if (embedFonts) field.embedFonts = true;
-      if (name) field.name = name;
       field.autoSize = TextFieldAutoSize.LEFT;
       field.antiAliasType = AntiAliasType.ADVANCED;
       field.defaultTextFormat = format;
@@ -54,9 +52,13 @@ package {
 
     public static function link(object: Sprite, url: String, alwaysUnderline: Boolean = false): Sprite {
       object.addEventListener(MouseEvent.CLICK, function(e: Event): void {
-        navigateToURL(new URLRequest(url), "_blank");
+        open(url);
       });
       return withPointer(withUnderline(object, alwaysUnderline));
+    }
+
+    public static function open(url: String): void {
+      navigateToURL(new URLRequest(url), "_blank");
     }
 
     public static function withUnderline(object: Sprite, alwaysUnderline: Boolean = false): Sprite {

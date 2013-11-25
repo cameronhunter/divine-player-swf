@@ -74,12 +74,24 @@ package {
         PLAYER_SIZE, PLAYER_SIZE
       );
 
+      share.addEventListener(MouseEvent.CLICK, function(e: Event): void {
+        if (e.target.name == Icon.TWITTER) {
+          Helpers.open("https://twitter.com/share?" + [
+            "url=" + escape(loaderInfo.parameters.url),
+            "text=" + escape(loaderInfo.parameters.text),
+            "related=vineapp"
+          ].join("&"));
+        } else if (e.target.name == Icon.EMBED) {
+          Helpers.open(loaderInfo.parameters.url + "/embed");
+        }
+      });
+
       var details: Details = new Details(
-        loaderInfo.parameters.name || "Ian Padgham",
-        loaderInfo.parameters.avatar || "https://v.cdn.vine.co/v/avatars/637F68B3-FE31-424F-BC88-E8AA4BF293CE-6199-0000041FF76BBB5A.jpg?versionId=1OKBqNZJwbvX1bxqI3sh22C4gpjsIUX4",
-        loaderInfo.parameters.text || "Look at these horses run free. It makes me so very #happy",
-        loaderInfo.parameters.date || 1385018455000,
-        loaderInfo.parameters.location || "Edinburgh",
+        loaderInfo.parameters.name,
+        loaderInfo.parameters.avatar,
+        loaderInfo.parameters.text,
+        loaderInfo.parameters.date,
+        loaderInfo.parameters.location,
         PLAYER_SIZE
       );
 
