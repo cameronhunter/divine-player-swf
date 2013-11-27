@@ -12,10 +12,9 @@ package activity {
 
     public function Curtain(image: String, width: uint, height: uint) {
       var poster: Image = new Image(image, width, height);
-      var background: Sprite = Helpers.circle(PLAY_BUTTON_DIAMETER, PLAY_BUTTON_COLOR);
 
       var playButton: Sprite = Helpers.withOpacity(0.85, new Sprite());
-      playButton.addChild(background);
+      playButton.addChild(Helpers.circle(PLAY_BUTTON_DIAMETER, PLAY_BUTTON_COLOR));
       playButton.addChild(Layout.middle(PLAY_BUTTON_DIAMETER, PLAY_BUTTON_DIAMETER, new Icon(Icon.PLAY, 48)));
 
       addEventListener(MouseEvent.ROLL_OVER, opacity(playButton, 1));

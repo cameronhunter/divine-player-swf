@@ -64,8 +64,6 @@ package {
         video.isPaused() ? video.play() : video.pause();
       });
 
-      var vineLogo: Sprite = new Icon(Icon.VINE, 24, 0xFFFFFF, 0.85);
-
       var share: Share = new Share(
         loaderInfo.parameters.url,
         PLAYER_SIZE, PLAYER_SIZE
@@ -106,6 +104,8 @@ package {
           audio.visible = curtain.getChildByName("playButton").visible = true;
         }
       });
+
+      var vineLogo: Sprite = Helpers.link(Helpers.sprite(new Icon(Icon.VINE, 24, 0xFFFFFF, 0.6)), loaderInfo.parameters.url);
 
       var player: Sprite = new Sprite();
       player.addChild(Helpers.fill(PLAYER_SIZE, PLAYER_SIZE, 0x000000, 1));
