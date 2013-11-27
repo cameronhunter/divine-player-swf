@@ -1,11 +1,9 @@
-# Divine Player SWF
-
-This is the flash player used by [divine-player](https://raw.github.com/cameronhunter/divine-player).
+# Standalone Player SWF
 
 ## Dev setup
 1. Clone the repository:
 ```
-git clone git@github.com:cameronhunter/divine-player-swf.git
+git clone git@github.com:vine/standalone-player-swf.git
 ```
 
 2. Install the dependencies (from the project root):

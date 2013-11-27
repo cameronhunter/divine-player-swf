@@ -51,7 +51,7 @@ module.exports = function(grunt) {
           'mxmlc',
           '<%= source %>/Player.as',
           '-benchmark',
-          '-output <%= temp %>/divine-player.swf',
+          '-output <%= temp %>/standalone-player.swf',
           '-source-path+=<%= source %>',
           '-managers flash.fonts.AFEFontManager',
           '-static-link-runtime-shared-libraries=true'
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
         cmd: [
           'mxmlc',
           '<%= test %>/unit/Runner.as',
-          '-output <%= temp %>/divine-player-tests.swf',
+          '-output <%= temp %>/standalone-player-tests.swf',
           '-source-path+=<%= source %>',
           '-source-path+=lib/as3/src',
           '-static-link-runtime-shared-libraries=true'
