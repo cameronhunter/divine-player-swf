@@ -20,11 +20,11 @@ package util {
       return fit(size, VERTICAL, objects);
     }
 
-    public static function horizontal(padding: uint, ...objects: Array): Sprite {
+    public static function horizontal(padding: int, ...objects: Array): Sprite {
       return layout(HORIZONTAL, objects, padding);
     }
 
-    public static function vertical(padding: uint, ...objects: Array): Sprite {
+    public static function vertical(padding: int, ...objects: Array): Sprite {
       return layout(VERTICAL, objects, padding);
     }
 
@@ -78,7 +78,7 @@ package util {
       return layout(direction, objects, offset, offset);
     }
 
-    private static function layout(direction: uint, objects: Array, padding: uint = 0, currentPosition: uint = 0): Sprite {
+    private static function layout(direction: uint, objects: Array, padding: int = 0, currentPosition: int = 0): Sprite {
       var dimension: String = direction == HORIZONTAL ? WIDTH : HEIGHT;
       var property: String = direction == HORIZONTAL ? X : Y;
 

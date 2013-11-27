@@ -16,7 +16,7 @@ package activity {
 
       var playButton: Sprite = Helpers.withOpacity(0.85, new Sprite());
       playButton.addChild(background);
-      playButton.addChild(Layout.middle(PLAY_BUTTON_DIAMETER, PLAY_BUTTON_DIAMETER, new Icon(Icon.PLAY, 56)));
+      playButton.addChild(Layout.middle(PLAY_BUTTON_DIAMETER, PLAY_BUTTON_DIAMETER, new Icon(Icon.PLAY, 48)));
 
       addEventListener(MouseEvent.ROLL_OVER, opacity(playButton, 1));
       addEventListener(MouseEvent.ROLL_OUT, opacity(playButton, playButton.alpha));

@@ -23,9 +23,9 @@ package activity {
       var share: Sprite = Helpers.sprite(Helpers.text("Share", SHARE_TEXT));
 
       var linkText: Sprite = Helpers.link(Helpers.sprite(Helpers.text(url, LINK_TEXT)), url, true);
-      var arrow: Sprite = Helpers.sprite(Helpers.text("→", LINK_TEXT));
+      var arrow: Sprite = new Icon(Icon.ARROW, 14);
 
-      var link: Sprite = Layout.horizontal(0, linkText, arrow);
+      var link: Sprite = Layout.horizontal(3, linkText, arrow);
 
       var twitter: Sprite = new ShareButton("Twitter", Icon.TWITTER, TWITTER_COLOR);
       var embed: Sprite = new ShareButton("Embed", Icon.EMBED, EMBED_COLOR);

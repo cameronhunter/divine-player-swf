@@ -20,7 +20,7 @@ package {
       fontFamily = "vine-icons",
       mimeType = "application/x-font",
       advancedAntiAliasing = "true",
-      unicodeRange = "U+E600-U+E605"
+      unicodeRange = "U+E600-U+E608"
     )]
     private static var VineIconFont: Class;
 
@@ -47,7 +47,7 @@ package {
         video.play();
       });
 
-      var audio: Sprite = new Icon(Icon.MUTE, 32, 0xFFFFFF, 0.85);
+      var audio: Sprite = new Icon(Icon.MUTE, 24, 0xFFFFFF, 0.85);
       Helpers.withPointer(audio).addEventListener(MouseEvent.CLICK, function(e: MouseEvent): void {
         var textField: TextField = e.currentTarget.getChildByName(Icon.MUTE) as TextField;
         if (video.isMuted()) {
@@ -63,6 +63,8 @@ package {
       playPause.addEventListener(MouseEvent.CLICK, function(): void {
         video.isPaused() ? video.play() : video.pause();
       });
+
+      var vineLogo: Sprite = new Icon(Icon.VINE, 24, 0xFFFFFF, 0.85);
 
       var share: Share = new Share(
         loaderInfo.parameters.url,
@@ -94,14 +96,14 @@ package {
       details.addEventListener(MouseEvent.CLICK, function(e: Event): void {
         if (e.target.name == "shareLink") {
           share.visible = !share.visible;
-          curtain.getChildByName("playButton").visible = !share.visible;
+          audio.visible = curtain.getChildByName("playButton").visible = !share.visible;
         }
       });
 
       share.addEventListener(MouseEvent.CLICK, function(e: Event): void {
         if (e.target.name == "closeButton") {
           share.visible = false;
-          curtain.getChildByName("playButton").visible = true;
+          audio.visible = curtain.getChildByName("playButton").visible = true;
         }
       });
 
@@ -112,6 +114,7 @@ package {
       player.addChild(Layout.absolute(15, 15, audio));
       player.addChild(curtain);
       player.addChild(share);
+      player.addChild(Layout.absolute(PLAYER_SIZE - (vineLogo.width + 15), PLAYER_SIZE - (vineLogo.height + 15), vineLogo));
 
       addChild(scaleForStage(Layout.vertical(0, player, details)));
     }

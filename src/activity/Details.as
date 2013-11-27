@@ -50,7 +50,10 @@ package activity {
 
       var details: TextField = Helpers.text([relativeTimestamp(date) + " ago", locationName ? "at " + locationName : "", "•"].join(" "), DETAILS_TEXT);
 
-      var shareLink: Sprite = Helpers.withPointer(Helpers.withUnderline(Helpers.sprite(Helpers.text("Share", SHARE_TEXT))));
+      var shareText: Sprite = Helpers.sprite(Helpers.text("Share", SHARE_TEXT));
+      var shareIcon: Sprite = new Icon(Icon.SHARE, 13, 0x00BF8F);
+      var shareLink: Sprite = Helpers.withPointer(Layout.horizontal(-1, shareText, shareIcon));
+
       shareLink.name = "shareLink";
 
       var textPart: Sprite = Layout.vertical(5, caption, Layout.horizontal(2, details, shareLink));

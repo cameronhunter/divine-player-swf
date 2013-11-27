@@ -14,6 +14,9 @@ package component {
     public static const CLOSE: String = "\ue603";
     public static const MUTE: String = "\ue604";
     public static const UNMUTE: String = "\ue605";
+    public static const ARROW: String = "\ue606";
+    public static const VINE: String = "\ue607";
+    public static const SHARE: String = "\ue608";
 
     private static const FONT_NAME: String = "vine-icons";
 

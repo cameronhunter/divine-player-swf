@@ -1,7 +1,9 @@
 package component {
 
+  import flash.display.Bitmap;
   import flash.display.Loader;
   import flash.display.Sprite;
+  import flash.display.DisplayObject;
   import flash.events.Event;
   import flash.net.URLRequest;
 
@@ -13,9 +15,10 @@ package component {
       var loader: Loader = new Loader();
 
       loader.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e: Event): void {
-        addChild(loader);
-        loader.width = width;
-        loader.height = height;
+        var image: DisplayObject = trySmoothing(loader);
+        image.width = width;
+        image.height = height;
+        addChild(image);
       });
 
       loader.load(new URLRequest(url));
@@ -23,6 +26,21 @@ package component {
       graphics.beginFill(0x000000, 0);
       graphics.drawRect(0, 0, width, height);
       graphics.endFill();
+    }
+
+    /**
+     * Smoothing only works if a valid crossdomain.xml exists on the image domain.
+     * So we give it a go, and fallback to the unsmoothed image.
+     */
+    private static function trySmoothing(loader: Loader): DisplayObject {
+      try {
+        var bitmap: Bitmap = loader.content as Bitmap;
+        bitmap.smoothing = true;
+        return bitmap;
+      } catch(e: Error) {
+        // Ignore
+      }
+      return loader;
     }
 
   }
