@@ -15,6 +15,7 @@ package {
       Security.allowDomain("*");
       Security.allowInsecureDomain("*");
 
+
       var poster: Image = new Image(
         loaderInfo.parameters.poster,
         stage.stageWidth,
@@ -51,10 +52,13 @@ package {
       ExternalInterface.addCallback("divineMute", video.mute);
       ExternalInterface.addCallback("divineUnmute", video.unmute);
       ExternalInterface.addCallback("divineMuted", video.isMuted);
+      ExternalInterface.addCallback("divineGetCurrentTime", video.getCurrentTime);
+      ExternalInterface.addCallback("divineCurrentTime", video.currentTime);
     }
 
     private function isSafe(value: String): Boolean {
       return /^[0-9A-Z]+$/i.test(value);
     }
   }
+
 }

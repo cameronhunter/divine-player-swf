@@ -49,9 +49,9 @@ module.exports = function(grunt) {
         cmd: [
           'mxmlc',
           '<%= source %>/Player.as',
-          '-output <%= temp %>/divine-player.swf',
-          '-source-path+=<%= source %>',
-          '-load-config=flex-config.xml'
+          '--output <%= temp %>/divine-player.swf',
+          '--source-path+=<%= source %>',
+          '--load-config=flex-config.xml'
         ].join(' ')
       },
 
@@ -59,10 +59,10 @@ module.exports = function(grunt) {
         cmd: [
           'mxmlc',
           '<%= test %>/unit/Runner.as',
-          '-output <%= temp %>/divine-player-tests.swf',
-          '-source-path+=<%= source %>',
-          '-source-path+=lib/as3/src',
-          '-load-config=flex-config.xml'
+          '--output <%= temp %>/divine-player-tests.swf',
+          '--source-path+=<%= source %>',
+          '--source-path+=lib/as3/src',
+          '--load-config=flex-config.xml'
         ].join(' ')
       }
     },
