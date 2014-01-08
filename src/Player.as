@@ -43,8 +43,8 @@ package {
 
       registerExternalMethods();
 
-      posterUrl = loaderInfo.parameters.poster;
-      videoUrl = loaderInfo.parameters.video;
+      posterUrl = Uri.isSafe(loaderInfo.parameters.poster);
+      videoUrl = Uri.isSafe(loaderInfo.parameters.video);
       loop = loaderInfo.parameters.loop == "true";
       muted = loaderInfo.parameters.muted == "true";
       autoplay = loaderInfo.parameters.autoplay == "true";
