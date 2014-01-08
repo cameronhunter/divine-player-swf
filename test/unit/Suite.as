@@ -5,6 +5,7 @@ package {
     public function Suite() {
       super();
       addTest(new PlayerTest("testPass"));
+      addTest(new UriTest("test_isSafe"));
     }
   }
 }
