@@ -9,6 +9,14 @@ package {
   public class Player extends Sprite {
 
     public function Player() {
+      try {
+        init();
+      } catch(e: Error) {
+        Logger.error(e);
+      }
+    }
+
+    private function init(): void {
       stage.align = StageAlign.TOP_LEFT;
       stage.scaleMode = StageScaleMode.NO_SCALE;
 
@@ -16,13 +24,13 @@ package {
       Security.allowInsecureDomain("*");
 
       var poster: Image = new Image(
-        loaderInfo.parameters.poster,
+        Uri.isSafe(loaderInfo.parameters.poster),
         stage.stageWidth,
         stage.stageHeight
       );
 
       var video: Video = new Video(
-        loaderInfo.parameters.video,
+        Uri.isSafe(loaderInfo.parameters.video),
         stage.stageWidth,
         stage.stageHeight,
         loaderInfo.parameters.autoplay == "true",
