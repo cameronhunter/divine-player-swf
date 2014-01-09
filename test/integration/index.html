@@ -27,26 +27,31 @@
     <button id="pause">Pause</button>
     <button id="mute">Mute</button>
     <button id="unmute">Unmute</button>
+    <button id="duration">Duration</button>
   </div>
 
   <script type="text/javascript">
     (function() {
       var player = document.getElementById("player");
 
-      var play = document.getElementById("play").addEventListener("click", function() {
+      document.getElementById("play").addEventListener("click", function() {
         player.divinePlay();
       }, false);
 
-      var pause = document.getElementById("pause").addEventListener("click", function() {
+      document.getElementById("pause").addEventListener("click", function() {
         player.divinePause();
       }, false);
 
-      var mute = document.getElementById("mute").addEventListener("click", function() {
+      document.getElementById("mute").addEventListener("click", function() {
         player.divineMute();
       }, false);
 
-      var unmute = document.getElementById("unmute").addEventListener("click", function() {
+      document.getElementById("unmute").addEventListener("click", function() {
         player.divineUnmute();
+      }, false);
+
+      document.getElementById("duration").addEventListener("click", function() {
+        alert(player.divineDuration());
       }, false);
     }());
   </script>
