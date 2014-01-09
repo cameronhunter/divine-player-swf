@@ -5,6 +5,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     source: 'src',
+    bower: 'bower_components',
     release: 'release',
     test: 'test',
     temp: '.tmp',
@@ -53,6 +54,8 @@ module.exports = function(grunt) {
           '-benchmark',
           '-output <%= temp %>/divine-player.swf',
           '-source-path+=<%= source %>',
+          '-source-path+=<%= bower %>/as3-utils/src',
+          '-source-path+=<%= bower %>/as3-components/src',
           '-static-link-runtime-shared-libraries=true'
         ].join(' ')
       },
@@ -63,7 +66,9 @@ module.exports = function(grunt) {
           '<%= test %>/unit/Runner.as',
           '-output <%= temp %>/divine-player-tests.swf',
           '-source-path+=<%= source %>',
-          '-source-path+=lib/as3/src',
+          '-source-path+=<%= bower %>/asunit/asunit-3.0/src',
+          '-source-path+=<%= bower %>/as3-utils/src',
+          '-source-path+=<%= bower %>/as3-components/src',
           '-static-link-runtime-shared-libraries=true'
         ].join(' ')
       }

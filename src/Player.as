@@ -5,6 +5,9 @@ package {
   import flash.display.StageScaleMode;
   import flash.external.ExternalInterface;
   import flash.system.Security;
+  import uk.co.cameronhunter.as3.components.Video;
+  import uk.co.cameronhunter.as3.components.Image;
+  import uk.co.cameronhunter.as3.utils.Logger;
 
   public class Player extends Sprite {
 
@@ -24,13 +27,13 @@ package {
       Security.allowInsecureDomain("*");
 
       var poster: Image = new Image(
-        Uri.isSafe(loaderInfo.parameters.poster),
+        loaderInfo.parameters.poster,
         stage.stageWidth,
         stage.stageHeight
       );
 
       var video: Video = new Video(
-        Uri.isSafe(loaderInfo.parameters.video),
+        loaderInfo.parameters.video,
         stage.stageWidth,
         stage.stageHeight,
         loaderInfo.parameters.autoplay == "true",
