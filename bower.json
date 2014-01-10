@@ -7,7 +7,7 @@
   ],
   "dependencies": {
     "asunit": "~4.2.3",
-    "as3-components": "~0.2.0"
+    "as3-components": "~0.3.0"
   },
   "ignore": [
     ".gitignore",
