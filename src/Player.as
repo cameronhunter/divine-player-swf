@@ -63,6 +63,7 @@ package {
       ExternalInterface.addCallback("divineUnmute", video.unmute);
       ExternalInterface.addCallback("divineMuted", video.isMuted);
       ExternalInterface.addCallback("divineDuration", video.duration);
+      ExternalInterface.addCallback("divineCurrentTime", video.currentTime);
     }
 
     private function isSafe(value: String): Boolean {

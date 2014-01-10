@@ -6,8 +6,10 @@
     "Cameron Hunter <hello@cameronhunter.co.uk>"
   ],
   "dependencies": {
-    "asunit": "~4.2.3",
-    "as3-components": "~0.3.0"
+    "as3-components": "~0.4.0"
+  },
+  "devDependencies": {
+    "asunit": "~4.2.3"
   },
   "ignore": [
     ".gitignore",

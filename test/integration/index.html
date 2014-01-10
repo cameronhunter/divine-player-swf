@@ -23,11 +23,20 @@
   </object>
 
   <div>
+    <input id="range" type="range" min="0" step="0.001" style="display:block; width:600px; margin: 0;" />
+
     <button id="play">Play</button>
     <button id="pause">Pause</button>
     <button id="mute">Mute</button>
     <button id="unmute">Unmute</button>
-    <button id="duration">Duration</button>
+
+    <div>
+      <label>Duration:</label> <span id="duration">Unknown</span>
+    </div>
+
+    <div>
+      <label>Current Time:</label> <span id="currentTime">Unknown</span>
+    </div>
   </div>
 
   <script type="text/javascript">
@@ -50,10 +59,49 @@
         player.divineUnmute();
       }, false);
 
-      document.getElementById("duration").addEventListener("click", function() {
-        alert(player.divineDuration());
-      }, false);
+      var range = document.getElementById("range");
+      range.addEventListener("change", function() {
+        player.divineCurrentTime(range.value);
+      });
+
+      when({
+        condition: function() {
+          return player.divineDuration;
+        },
+        execute: function() {
+          // Set Duration
+          when({
+            condition: function() {
+              return player.divineDuration();
+            },
+            execute: function() {
+              range.max = player.divineDuration();
+              range.style.display = "block";
+              document.getElementById("duration").innerHTML = player.divineDuration();
+            }
+          });
+
+          // Set Current Time
+          var currentTime = document.getElementById("currentTime");
+          setInterval(function() {
+            range.value = player.divineCurrentTime();
+            currentTime.innerHTML = player.divineCurrentTime();
+          }, 10);
+        }
+      });
     }());
+
+    function when(options) {
+      var timer = setInterval(function() {
+        if (options.condition()) {
+          clearTimeout(timer);
+        } else {
+          return;
+        }
+
+        options.execute();
+      }, options.interval || 10);
+    }
   </script>
 
 </body>
