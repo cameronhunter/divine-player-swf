@@ -7,7 +7,7 @@ package {
       if (!url) throw new Error("URL is null or empty");
 
       // Prevent NULL character attack
-      if (url.indexOf("\\x00") >= 0) throw new Error("URL contains a NULL character");
+      if (url.indexOf("\\x00") >= 0 || url.indexOf("%00") >= 0) throw new Error("URL contains a NULL character");
 
       return url;
     }
